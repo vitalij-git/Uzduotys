@@ -37,6 +37,4 @@ if (preg_match('/MSIE/i', $u_agent) && !preg_match('/Opera/i', $u_agent)) {
     echo "<br>" ;
     echo "<img src='https://upload.wikimedia.org/wikipedia/commons/thumb/6/66/Netscape_logo.svg/1200px-Netscape_logo.svg.png' >";
 }
-
-
 ?>
