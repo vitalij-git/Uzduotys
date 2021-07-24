@@ -44,5 +44,11 @@
     <form action="logotipas">
         <button type="submit">Tikrinti</button>
     </form>
+    <br>
+    <h2>Graza</h2>
+    <form action="graza.php" method="get">
+        <input type="text" name="graza">
+        <button type="submit">Patvirtinti</button>
+    </form>
 </body>
 </html>
