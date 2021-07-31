@@ -1,7 +1,7 @@
 <?php
 if(isset($_GET["graza"]) && !empty($_GET["graza"])) {
    $g= $_GET["graza"];
-   $banknotai = array(20, 20, 30, 30, 30);
+   $banknotai = array(0, 20, 30, 30, 30);
    $isduotiBanknotai = array(0, 0, 0, 0, 0);
    $monetos = array(50, 50);
    $isduotiMonetos = array(0, 0);
@@ -73,7 +73,5 @@ if(isset($_GET["graza"]) && !empty($_GET["graza"])) {
     echo "<br>";
     echo "kasoje liko: <br> 100 nominalu kiekis: ".$banknotai[0]. "<br> 50 nominalu kiekis: ".$banknotai[1]."<br> 20 nominalu kiekis: " .$banknotai[2]."<br> 10 nominalu kiekis: ".$banknotai[3]."<br> 5 nominalu kiekis: ".$banknotai[4]."<br> 2 nominalu kiekis: ".$monetos[0]."<br> 1 nominalu kiekis: ". $monetos[1];
     
-    // isduotiBanknotai=[0,0,0,0,0]; 
-    // isduotiMonetos=[0,0];
     }
 ?>

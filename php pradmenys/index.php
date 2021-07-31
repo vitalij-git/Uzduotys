@@ -10,9 +10,10 @@
     <h2>Skaiciuotuvas</h2>
     <form action="calculator.php" method="get">
     <input type="text" name="number1" value="5">
-    <input type="text" name="symbol" >
+    <input type="text" name="symbol" value="+">
     <input type="text" name="number2" value="7">
     <button type="submit">Patvirtinti</button>
+    <!-- <input class='disabled'  value='<?php echo $result?>' />"; -->
     </form>
     <br>
     <h2>Trupmenu skaiciuotuvas</h2>

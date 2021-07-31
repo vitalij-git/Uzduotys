@@ -18,7 +18,10 @@ if(isset($_GET["number1"]) && !empty($_GET["number1"]) && isset($_GET["number2"]
         $results= $first/$second;
         break;
     }
-    echo "<input class='disabled' disabled='true' value='$results' />";
+    echo "<input disabled='true' value='$results' name='result' />";
+    header("location: index.php");
+    
+    
 }
 else{
     echo "Kazkas negerai";
