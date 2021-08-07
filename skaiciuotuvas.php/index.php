@@ -10,7 +10,7 @@
 
 <body>
 
-    <form action="skaiciuotuvas.php" method="get">
+    <form action="index.php" method="get">
         <input type="text" name="aritmetika" />
         <button type="submit" name="patvirtinti">Skaiciuoti</button>
     </form>

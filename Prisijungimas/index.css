@@ -1,0 +1,242 @@
+body{
+    max-width: 1920px;
+    margin: auto;
+    background: #657AD3 0% 0% no-repeat padding-box;
+    opacity: 1;
+    display: flex;
+}
+.left-container{
+    margin-top: 14%;
+    margin-left: 560px;
+    margin-bottom: 1%;
+    width: 320px; 
+    background: url(https://static6.depositphotos.com/1003229/609/v/600/depositphotos_6096843-stock-illustration-circuit-board-vector-background.jpg);
+    opacity: 1;
+}
+.sign-up-block{
+    width: 100%;
+    height: 37px;
+    padding-top: 32px;
+    padding-left: 40px;
+}
+.sign-up-block h1{
+    font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-normal) 32px/37px Gill Sans MT;
+    letter-spacing: var(--unnamed-character-spacing-0);
+    color: var(--unnamed-color-ffffff);
+    text-align: left;
+    font: normal normal normal 32px/37px Gill Sans MT;
+    letter-spacing: 0px;
+    color: #FFFFFF;
+    opacity: 1; 
+    margin: 0px;
+}
+.text-block{
+    padding-left: 40px;
+    padding-top: 311px;
+    font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-normal) var(--unnamed-font-size-16)/19px Gill Sans MT;
+    letter-spacing: var(--unnamed-character-spacing-0);
+    color: var(--unnamed-color-ffffff);
+    text-align: left;
+    font: normal normal normal 16px/19px Gill Sans MT;
+    letter-spacing: 0px;
+    color: #FFFFFF;
+    opacity: 1;
+}
+.text-decoration{
+    text-decoration: underline;
+}
+.right-container{
+    width: 480px;
+    height: 484px;
+    margin-top: 13.0%;
+    margin-right: 549px;
+    background: var(--unnamed-color-ffffff) 0% 0% no-repeat padding-box;
+    background: #FFFFFF 0% 0% no-repeat padding-box;
+    opacity: 1;
+}
+.x-block{
+    padding-left: 442.5px;
+    padding-top: 13.51px;
+    padding-right: 22.5px;
+    width: 15px;
+    height: 35px;
+}
+.x-block h2{
+    font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-normal) 30px/35px Gill Sans MT;
+    letter-spacing: var(--unnamed-character-spacing-0);
+    text-align: left;
+    font: normal normal normal 30px/35px Gill Sans MT;
+    letter-spacing: 0px;
+    color: #000000;
+    opacity: 1;
+    margin: 0px;
+}
+.form-block{
+    padding-left: 3.75rem;
+    padding-right: 3.75rem;
+    padding-top: 2.875rem;
+}
+.form-text{
+    font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-normal) 13px/15px Gill Sans MT;
+    letter-spacing: var(--unnamed-character-spacing-0);
+    text-align: left;
+    font: normal normal normal 13px/15px Gill Sans MT;
+    letter-spacing: 0px;
+    color: #000000;
+    opacity: 1;
+    font-family: Gill Sans MT;
+    font-size: 13px;
+}
+.form-input{
+    font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-normal) var(--unnamed-font-size-18)/21px Gill Sans MT;
+    letter-spacing: var(--unnamed-character-spacing-0);
+    text-align: left;
+    font: normal normal normal 18px/21px Gill Sans MT;
+    letter-spacing: 0px;
+    color: #A9A9A9;
+    opacity: 1;
+    font-family: Gill Sans MT;
+    font-size: 18px;
+    background: var(--unnamed-color-ffffff) 0% 0% no-repeat padding-box;
+    background: #FFFFFF 0% 0% no-repeat padding-box;
+    opacity: 1;
+    width: 360px;
+    height: 28px;
+    border: none;
+}
+.button-block{
+    width: 166px;
+    height: 40px;
+    background: #FFC0CB;
+    border: none;
+    border-radius: 18px;
+    font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-normal) var(--unnamed-font-size-18)/21px Gill Sans MT;
+    letter-spacing: var(--unnamed-character-spacing-0);
+    color: var(--unnamed-color-ffffff);
+    text-align: center;
+    font: normal normal normal 18px/21px Gill Sans MT;
+    letter-spacing: 0px;
+    color: #FFFFFF;
+    opacity: 1;
+}
+.button-block:hover{
+    background-color: red;
+    cursor:pointer;
+}
+.form-block-or{
+    margin-left: 10px;
+    font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-normal) var(--unnamed-font-size-18)/21px Gill Sans MT;
+    letter-spacing: var(--unnamed-character-spacing-0);
+    text-align: left;
+    font: normal normal normal 18px/21px Gill Sans MT;
+    letter-spacing: 0px;
+    color: #000000;
+    opacity: 1;
+}
+.form-block-sign-in{
+    margin-left: 20px;
+    font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-normal) var(--unnamed-font-size-18)/21px Gill Sans MT;
+    letter-spacing: var(--unnamed-character-spacing-0);
+    text-align: left;
+    font: normal normal normal 18px/21px Gill Sans MT;
+    letter-spacing: 0px;
+    color: #00008B;
+    opacity: 1;
+    text-decoration: underline;
+}
+.form-border{
+    width: 360px;
+    height: 1px;
+    background: #808080 0% 0% no-repeat padding-box;
+    opacity: 1;
+}
+button{
+    padding: 0;
+    border: none;
+    background: none;
+}
+input{
+    display: block;
+    width: 100%;
+    border: 0;
+    border-bottom: 1px solid #808080 !important;
+    padding-bottom: 0.3333rem;
+    padding-left: 0;
+}
+input:focus {
+    border: 0;
+    outline: none;
+    border-bottom: 1px solid black;
+}
+::-webkit-input-placeholder {
+    font: normal normal normal 1rem/1.1667rem Gill Sans MT;
+    color: #A9A9A9;
+
+}
+.close:hover {
+    cursor: pointer;
+    color:#808080;
+}
+.close {
+    font: normal normal normal 1.6667rem/1.9444rem Gill Sans MT;
+    color:#000000;
+    position: absolute;
+    top: 29%;
+    right: 30%;
+}
+
+label{
+    padding-bottom: 0.6667rem;
+    display: block;
+}
+.right-column-action input, .right-column-action p, .right-column-action a {
+    display:inline-block;
+}
+.right-column-action p {
+    padding-left: 0.7778rem;
+    margin: 0;
+    font: normal normal normal 1rem/1.1667rem Gill Sans MT;
+}
+.input{
+    margin-bottom: 1.8889rem;
+}
+.login-form-block{
+    margin-top: 100px;
+}
+.forgot-form-block{
+    margin-top: 150px;
+}
+@media screen and (min-width:1400px) and (max-width: 1900px){
+    .left-xxl-container{
+    margin-top: 200px;
+    margin-left: 20%;
+    margin-bottom: 213px;
+    }
+    .right-xxl-container{
+        margin-top: 158px;
+        margin-right: 20%;
+        margin-bottom: 163px;
+    }
+}
+@media screen and (min-width:1024px) and (max-width: 1399px){
+   
+    .left-xxl-container{
+    margin-top: 9%;
+    margin-left: 10%;
+    }
+    .right-xxl-container{
+        margin-top: 8%;
+        margin-right: 10%;
+    }
+    .close {
+        top: 20%;
+        right: 33%;
+}
+@media screen and (min-width:768px) and (max-width: 1023px){
+    .left-xxl-container{
+    margin-left: 2%;
+    }
+    .right-xxl-container{
+        margin-right: 2%;
+    }
+}
