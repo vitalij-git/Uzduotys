@@ -31,7 +31,7 @@
             
         }  
     }
-
+    
     $klientai = array();
     for($i=0; $i<200;$i++){
         array_push($klientai, new Klientas("vardas".($i+1),"pavarde".($i+1),"asmensKodas".($i+1),"prisijungimoData".($i+1),"adresas".($i+1),"elpastas".($i+1)));
@@ -102,7 +102,7 @@
         var_dump($trikampis);
         echo "</p>";
     }
-
+  
     class Keturkampis{
         public $a;
         public $b;
@@ -132,24 +132,25 @@
             return $this->istrizaine;
         }
         function nubraizyk(){
-            echo "<script> var staciakampioContainer = document.querySelector('.staciakampio-container')
-            var div= document.createElement('div')";
-            echo "div.style.width=".$this->a."'cm'";
-            echo "div.style.height=".$this->b."'cm'";
-            echo "div.style.height=".$this->b."'cm'";
-            echo "div.classList.add('staciakampio-figura')";
+            echo "<script> var staciakampioContainer = document.querySelector('.staciakampio-container');";
+            echo "var div = document.createElement('div');";
+            echo "div.style.width=".floatval($this->a)."px;";
+            echo "div.style.height=".floatval($this->b)."px;";
+            echo "div.classList.add('staciakampio-)figura');";
             echo "staciakampioContainer.append(div);";
             echo "</script>";
   
         }
     }
     if(isset($_POST["keturkampis"])){
+        echo "<div class='staciakampio-container'> </div>";
         $keturkampis = new Keturkampis(4,5);
         echo"<p>";
         var_dump($keturkampis);
         echo "</p>";
+      
     }
-
-    echo "<div class='staciakampio-container'> </div>";
+    
+    
     ?>
     
