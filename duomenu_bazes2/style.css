@@ -1,0 +1,26 @@
+h1{
+    display: flex;
+    text-align: center;
+}
+.container{
+    margin-top: 5%;
+
+}
+.container input{
+    width: 500px;
+}
+.bottom-action{
+    margin:15px;
+    display: flex;
+   justify-content: space-between;
+}
+a{
+    display: flex !important;
+    justify-content: center;
+    align-items: center;
+    font-size: 100% !important;
+
+}
+button{
+    font-weight: bold !important;
+}
