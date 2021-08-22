@@ -8,7 +8,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="main_style.css">
     <?php require_once("includes.php"); ?>
     <title>Document</title>
 </head>
@@ -58,8 +58,8 @@
         <input type="password" class="form-control" id="exampleInputPassword1" name="password">
       </div>
       <div class="bottom-action">
-          <button type="submit" class="btn btn-primary" name="submit">Sing in</button>
-          <a href="register.php" class="badge badge-primary">Sign up</a>
+          <button type="submit" class="btn btn-primary bottom-action" name="submit">Sing in</button>
+          <a href="register.php" class="badge badge-primary bottom-action">Sign up</a>
       </div>
     </form>
     
