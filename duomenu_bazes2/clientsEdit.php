@@ -29,7 +29,7 @@ if (!isset($_COOKIE["login"])) {
             $sql = "INSERT INTO `clients`( `name`, `surname`, `date_joined`, `perks_id`) 
      VALUES ('$name','$surname','$date','$perks')";
             if (mysqli_query($conn, $sql)) {
-                $message =  "Vartotojas pridėtas sėkmingai";
+                $message =  "Klientas atnaujintas";
                 $message_status = "success";
             } else {
                 $message =  "Kazkas ivyko negerai";

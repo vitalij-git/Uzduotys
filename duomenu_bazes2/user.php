@@ -19,6 +19,19 @@ if (!isset($_COOKIE["login"])) {
 </head>
 
 <body>
+<?php if (isset($_GET["ID"])) {
+    $id = $_GET["ID"];
+    $sql = "DELETE FROM `user` WHERE ID = $id";
+    if (mysqli_query($conn, $sql)) {
+        $message = "Vartotojas sekmingai istrintas";
+        $message_status = "success";
+    } else {
+        $message = "Kazkas ivyko negerai";
+        $message_status = "danger";
+    }
+}
+
+?>
     <div class="container">
         <?php require_once("includes_menu.php"); ?>
         <?php if (isset($message)) { ?>
@@ -35,6 +48,7 @@ if (!isset($_COOKIE["login"])) {
                     <th scope="col">Pavarde</th>
                     <th scope="col">Gimimo data</th>
                     <th scope="col">El. paštas</th>
+                    <th scope="col">Teises</th>
                     <th scope="col">Veiksmai</th>
                 </tr>
             </thead>
@@ -56,10 +70,10 @@ if (!isset($_COOKIE["login"])) {
                     echo "<td>" . $user["surname"] . "</td>";
                     echo "<td>" . $user["birthdate"] . "</td>";
                     echo "<td>" . $user["email"] . "</td>";
-                    $perks_id = $user["perks_id"];
+                    echo "<td>" . $user["perks_id"]. "</td>";
                     echo "<td>";
-                    // echo "<a href='clients.php?ID=" . $clients["ID"] . "'>Trinti</a><br>";
-                    // echo "<a href='clientsEdit.php?ID=" . $clients["ID"] . "'>Redaguoti</a>";
+                    echo "<a href='user.php?ID=" . $user["ID"] . "'>Trinti</a><br>";
+                    echo "<a href='userEdit.php?ID=" . $user["ID"] . "'>Redaguoti</a>";
                     echo "</td>";
                     echo "</tr>";
                 }

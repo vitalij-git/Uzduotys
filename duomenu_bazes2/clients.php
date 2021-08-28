@@ -4,7 +4,7 @@ require_once("includes.php");
 if (!isset($_COOKIE["login"])) {
     header("Location: index.php");
 } else {
-    echo "Sveikas atvykes " . ($_COOKIE['login']);
+    $loginArray = explode("|", $_COOKIE["login"]);
 }
 ?>
 <!DOCTYPE html>
@@ -21,20 +21,21 @@ if (!isset($_COOKIE["login"])) {
     $sql = "DELETE FROM `clients` WHERE ID = $id";
     if (mysqli_query($conn, $sql)) {
         $message = "Klientas sekmingai istrintas";
-        $class = "success";
+        $message_status = "success";
     } else {
         $message = "Kazkas ivyko negerai";
-        $class = "danger";
+        $message_status = "danger";
     }
 }
 
 ?>
 
 <body>
+
     <div class="container">
         <?php require_once("includes_menu.php"); ?>
         <?php if (isset($message)) { ?>
-            <div class="alert alert-<?php echo $class; ?>" role="alert">
+            <div class="alert alert-<?php echo $message_status; ?>" role="alert">
                 <?php echo $message; ?>
             </div>
         <?php } ?>
@@ -46,12 +47,13 @@ if (!isset($_COOKIE["login"])) {
                     <th scope="col">Pavardė</th>
                     <th scope="col">Prisijungimo data</th>
                     <th scope="col">Teisės</th>
-                    <th scope="col">Veiksmai</th>
+                    <?php if ($loginArray[2] == 1 || $loginArray[2] == 2 || $loginArray[2] == 4) { ?>
+                        <th scope="col">Veiksmai</th>
+                    <?php } ?>
                 </tr>
             </thead>
             <tbody>
                 <?php
-
                 if (isset($_GET["sorting_id"]) && !empty($_GET["sorting_id"])) {
                     $sorting = $_GET["sorting_id"];
                 } else {
@@ -77,17 +79,20 @@ if (!isset($_COOKIE["login"])) {
                     } else {
                         echo "<td>Nepatvirtintas klientas</td>";
                     }
-                    echo "<td>";
-                    echo "<a href='clients.php?ID=" . $clients["ID"] . "'>Trinti</a><br>";
-                    echo "<a href='clientsEdit.php?ID=" . $clients["ID"] . "'>Redaguoti</a>";
-                    echo "</td>";
+                    if ($loginArray[2] == 1 || $loginArray[2] == 2 || $loginArray[2] == 4) {
+                        echo "<td>";
+                        echo "<a href='clients.php?ID=" . $clients["ID"] . "'>Trinti</a><br>";
+                        echo "<a href='clientsEdit.php?ID=" . $clients["ID"] . "'>Redaguoti</a>";
+                        echo "</td>";
+                    }
                     echo "</tr>";
                 }
                 ?>
             </tbody>
         </table>
-
     </div>
+
+
 </body>
 
 </html>
