@@ -8,18 +8,16 @@ if (!isset($_COOKIE["login"])) {
 }
 ?>
 <style>
-@media screen and (min-width: 1200px){
- .navbar-nav-button form{
-    margin-left: 350px;
-    margin-top: 7px;
-}
-}
-@media screen and (min-width: 992px) and (max-width: 1199px){
- .navbar-nav-button form{
-    margin-left: 200px;
-    margin-top: 7px;
-}
-}
+    nav {
+        margin-bottom: 10px;
+    }
+
+    @media screen and (min-width: 992px) {
+        .navbar-nav-button form {
+            margin-left: 350px;
+            margin-top: 7px;
+        }
+    }
 </style>
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -29,11 +27,9 @@ if (!isset($_COOKIE["login"])) {
     </button>
     <div class="collapse navbar-collapse navbar-action" id="navbarNavAltMarkup">
         <div class="navbar-nav">
-            <?php if($loginArray[2]==1 ||$loginArray[2]==4 ){?>
-            <a class="nav-item nav-link" href="user.php">Vartojojai </a>
-            <a class="nav-item nav-link" href="addUser.php">Prideti vartotoja</a>
-            <?php }?>
-            <a class="nav-item nav-link" href="newClient.php">Prideti klienta</a>
+            <?php if ($loginArray[2] == 1 || $loginArray[2] == 4) { ?>
+                <a class="nav-item nav-link" href="user.php">Vartojojai </a>
+            <?php } ?>
             <a class="nav-item nav-link" href="company.php">Imones</a>
             <a class="nav-item nav-link" href="myAccount.php">Mano paskyra</a>
         </div>

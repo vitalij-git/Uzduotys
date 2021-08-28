@@ -4,7 +4,7 @@ require_once("includes.php");
 if (!isset($_COOKIE["login"])) {
     header("Location: index.php");
 } else {
-    echo "Sveikas atvykes " . ($_COOKIE['login']);
+    
 }
 ?>
 <!DOCTYPE html>
@@ -34,6 +34,9 @@ if (!isset($_COOKIE["login"])) {
 ?>
     <div class="container">
         <?php require_once("includes_menu.php"); ?>
+        <form action="addUser.php" method="get">
+            <button type="submit" class="btn btn-primary" >Prideti vartotoja</button>
+        </form>
         <?php if (isset($message)) { ?>
             <div class="alert alert-<?php echo $message_status; ?>" role="alert">
                 <?php echo $message; ?>

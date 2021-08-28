@@ -9,43 +9,55 @@
     <link rel="stylesheet" href="main_style.css">
     <?php require_once("includes.php"); ?>
     <title>Document</title>
+    <style>
+        .hide {
+            display: none;
+        }
+    </style>
 </head>
 
 <body>
     <?php
-   
-    if (isset($_POST["submit"])) {
-        $username = $_POST["username"];
-        $password = $_POST["password"];
-        $repeatpassword = $_POST["repeatpassword"];
-        $name = $_POST["name"];
-        $surname = $_POST["surname"];
-        $birthdate = $_POST["birthdate"];
-        $email = $_POST["email"];
-        $user_perks= $_GET["user-perks"];
 
-        $sql = "INSERT INTO `user`( `username`, `password`, `name`, `surname`, `birthdate`, `email`, `perks_id`) 
-        VALUES ('$username','$password','$name','$surname','$birthdate','$email','$user_perks')";
+    if (isset($_GET["ID"])) {
+        $id = $_GET["ID"];
+        $sql = "SELECT * FROM user WHERE ID = $id";
         $result = $conn->query($sql);
-        $message_status = "danger";
-        if ($result->num_rows == 1) {
-            $message = "toks jau uzimtas";
-        } else {
-            if ($password == $repeatpassword) {
-                $sql = "INSERT INTO `user`( `username`, `password`, `name`, `surname`, `birthdate`, `email`, `perks_id`) 
-                VALUES ('$username','$password','$name','$surname','$birthdate','$email',0)";
 
-                if (mysqli_query($conn, $sql)) {
-                    $message_status = "success";
-                    $message = "Vartotojas sukurtas sekmingai";
-                }
-                else{
-                    $message = "Kazkas ivyko negerai";
-                }
-            } else {
-                $message = "Slaptazodziai nesutampa";
-            }
+        if ($result->num_rows == 1) {
+            $user = mysqli_fetch_array($result);
         }
+    }
+    if (isset($_POST["submit"])) {
+        if (
+            isset($_GET["name"]) && isset($_GET["surname"]) && isset($_GET["perks_id"]) && isset($_GET["birthdate"]) && isset($_GET["email"])
+            && !empty($_GET["name"]) && !empty($_GET["surname"]) && !empty($_GET["perks_id"]) && !empty($_GET["birthdate"]) && !empty($_GET["email"])
+        ) {
+            $id = $_POST["ID"];
+            $username = $_POST["username"];
+            $name = $_POST["name"];
+            $surname = $_POST["surname"];
+            $birthdate = $_POST["birthdate"];
+            $email = $_POST["email"];
+            $user_perks = $_POST["user-perks"];
+            $sql = "UPDATE `user` SET `username`='$username',`name`='$name',`surname`='$surname',`birthdate`='$birthdate',`email`='$email',`perks_id`='$user_perks' WHERE ID=$id";
+            $result = $conn->query($sql);
+
+            $message_status = "danger";
+            // if ($result->num_rows == 1) {
+            //     $message = "toks jau uzimtas";
+            //     $sql = "UPDATE `user` SET `username`='$username',`name`='$name',`surname`='$surname',`birthdate`='$birthdate',`email`='$email',`perks_id`='$user_perks' WHERE ID=$id";
+            //     $result = $conn->query($sql);
+
+            if (mysqli_query($conn, $sql)) {
+                $message_status = "success";
+                $message = "Vartotojas redaguotas sekmingai";
+            }
+        } else {
+            $message = "Kazkas ivyko negerai";
+        }
+        // }
+
     }
 
     ?>
@@ -53,60 +65,58 @@
         <?php require_once("includes_menu.php"); ?>
         <div class="cointainer-block">
             <h1>Redaguoti vartotoja</h1>
-            <form action="register.php" method="post">
+            <form action="userEdit.php" method="post">
+                <input class="hide" type="text" name="ID" value="<?php echo $user["ID"]; ?>" />
                 <div class="mb-3">
                     <label class="form-label">Name</label>
-                    <input type="text" class="form-control" name="name" required="true">
+                    <input type="text" class="form-control" name="name" value="<?php echo $user["name"]; ?>">
                 </div>
                 <div class="mb-3">
                     <label class="form-label">Surname</label>
-                    <input type="text" class="form-control" name="surname" required="true">
+                    <input type="text" class="form-control" name="surname" value="<?php echo $user["surname"]; ?>">
                 </div>
                 <div class="mb-3">
                     <label for="birthday">Birthdate:</label>
-                    <input type="date" id="birthday" class="form-control" name="birthdate" required="true">
+                    <input type="date" id="birthday" class="form-control" name="birthdate" value="<?php echo $user["birthdate"]; ?>">
                 </div>
                 <div class="mb-3">
                     <label class="form-label">Username</label>
-                    <input type="text" class="form-control" name="username" required="true">
-                </div>
-                <div class="mb-3">
-                    <label for="exampleInputPassword1" class="form-label">Password</label>
-                    <input type="password" class="form-control"  name="password" required="true">
-                </div>
-                <div class="mb-3">
-                    <label for="exampleInputPassword1" class="form-label">Repeat password</label>
-                    <input type="password" class="form-control"  name="repeatpassword" required="true">
+                    <input type="text" class="form-control" name="username" value="<?php echo $user["username"]; ?>">
                 </div>
                 <label for="exampleInputEmail1">Email address</label>
-                <input type="email" class="form-control" id="exampleInputEmail1" name="email" aria-describedby="emailHelp" placeholder="Enter email" required="true">
+                <input type="email" class="form-control" id="exampleInputEmail1" name="email" aria-describedby="emailHelp" value="<?php echo $user["email"]; ?>">
                 <div class="form-group">
-                <label for="user-perks">Teisės</label>
-                <select class="form-control" name="user-perks">
-                    <?php
-                    $sql = "SELECT * FROM user_perks";
-                    $result = $conn->query($sql);
-                    while ($userRights = mysqli_fetch_array($result)) {
-                        echo "<option value='" . $clientRights["name"] . "'>";
-                        echo $userRights["value"];
-                        echo "</option>";
-                    }
-                    ?>
-                </select>
-            </div>
+                    <label for="user-perks">Teisės</label>
+                    <select class="form-control" name="user-perks">
+                        <?php
+                        $sql = "SELECT * FROM user_perks";
+                        $result = $conn->query($sql);
+                        while ($userRights = mysqli_fetch_array($result)) {
+                            if ($user["perks_id"] == $userRights["name"]) {
+                                echo "<option value='" . $userRights["name"] . "' selected='true'>";
+                            } else {
+                                echo "<option value='" . $clientRights["name"] . "'>";
+                            }
+                            echo $userRights["value"];
+                            echo "</option>";
+                        }
+                        ?>
+                    </select>
+                </div>
                 <?php
                 if (isset($message)) { ?>
                     <div class="alert alert-<?php echo $message_status; ?>" role="alert">
-                    <?php echo $message; ?>
-                </div>
+                        <?php echo $message; ?>
+                    </div>
                 <?php } ?>
                 <div class="bottom-action">
-                    <button type="submit" class="btn btn-primary bottom-action" name="submit">Patvirtinti</button>  
+                    <button type="submit" class="btn btn-primary bottom-action" name="submit">Patvirtinti</button>
+                    <a href="user.php">Vartotojų sąrašas</a><br>
                 </div>
             </form>
         </div>
 
-    
+
 
     </div>
 </body>

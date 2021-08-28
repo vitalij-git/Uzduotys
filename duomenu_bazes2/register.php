@@ -33,7 +33,7 @@
         } else {
             if ($password == $repeatpassword) {
                 $sql = "INSERT INTO `user`( `username`, `password`, `name`, `surname`, `birthdate`, `email`, `perks_id`) 
-                VALUES ('$username','$password','$name','$surname','$birthdate','$email',0)";
+                VALUES ('$username','$password','$name','$surname','$birthdate','$email',5)";
 
                 if (mysqli_query($conn, $sql)) {
                     $message_status = "success";

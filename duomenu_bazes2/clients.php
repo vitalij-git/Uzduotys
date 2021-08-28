@@ -34,6 +34,11 @@ if (!isset($_COOKIE["login"])) {
 
     <div class="container">
         <?php require_once("includes_menu.php"); ?>
+        <?php if($loginArray[2]==1 || $loginArray[2]==2 || $loginArray[2]==4 ){?>
+        <form action="newClient.php" method="get">
+            <button type="submit" class="btn btn-primary" >Prideti klienta</button>
+        </form>
+        <?php } ?>
         <?php if (isset($message)) { ?>
             <div class="alert alert-<?php echo $message_status; ?>" role="alert">
                 <?php echo $message; ?>

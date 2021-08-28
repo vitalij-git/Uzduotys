@@ -21,9 +21,9 @@ if (!isset($_COOKIE["login"])) {
 <body>
     <?php
     if (isset($_GET["submit"])) {
-        if (isset($_GET["name"]) && isset($_GET["surname"]) && isset($_GET["perks_id"]) && isset($_GET["date"]) && !empty($_GET["name"]) && !empty($_GET["surname"]) && !empty($_GET["perks_id"]) && !empty($_GET["date"])) {
+        if (isset($_GET["name"]) && isset($_GET["surname"]) && isset($_GET["perks_id"]) && isset($_GET["date"]) && !empty($_GET["name"]) && !empty($_GET["surname"]) && !empty($_GET["perks_id"]) ) {
             $name = $_GET["name"];
-            $surname = $_GET["sruname"];
+            $surname = $_GET["surname"];
             $perks = $_GET["perks_id"];
             $date = $_GET["date"];
             $sql = "INSERT INTO `clients`( `name`, `surname`, `date_joined`, `perks_id`) 
@@ -41,15 +41,11 @@ if (!isset($_COOKIE["login"])) {
         }
     }
 
-
-
-
-
     ?>
     <div class="container">
         <?php require_once("includes_menu.php"); ?>
-        <h1>Vartotojo kūrimas</h1>
-        <form action="clientsNew.php" method="get">
+        <h1>Kliento kūrimas</h1>
+        <form action="newClient.php" method="get">
 
             <div class="form-group">
                 <label for="name">Vardas</label>

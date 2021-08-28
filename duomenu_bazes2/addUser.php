@@ -13,7 +13,7 @@
 
 <body>
     <?php
-   
+
     if (isset($_POST["submit"])) {
         $username = $_POST["username"];
         $password = $_POST["password"];
@@ -22,6 +22,7 @@
         $surname = $_POST["surname"];
         $birthdate = $_POST["birthdate"];
         $email = $_POST["email"];
+        $user_id= $_POST["user_id"];
 
         $sql = "SELECT * FROM `user` WHERE `username`='$username'";
         $result = $conn->query($sql);
@@ -31,13 +32,12 @@
         } else {
             if ($password == $repeatpassword) {
                 $sql = "INSERT INTO `user`( `username`, `password`, `name`, `surname`, `birthdate`, `email`, `perks_id`) 
-                VALUES ('$username','$password','$name','$surname','$birthdate','$email',0)";
+                VALUES ('$username','$password','$name','$surname','$birthdate','$email',$user_id)";
 
                 if (mysqli_query($conn, $sql)) {
                     $message_status = "success";
                     $message = "Vartotojas sukurtas sekmingai";
-                }
-                else{
+                } else {
                     $message = "Kazkas ivyko negerai";
                 }
             } else {
@@ -70,27 +70,42 @@
                 </div>
                 <div class="mb-3">
                     <label for="exampleInputPassword1" class="form-label">Password</label>
-                    <input type="password" class="form-control"  name="password" required="true">
+                    <input type="password" class="form-control" name="password" required="true">
                 </div>
                 <div class="mb-3">
                     <label for="exampleInputPassword1" class="form-label">Repeat password</label>
-                    <input type="password" class="form-control"  name="repeatpassword" required="true">
+                    <input type="password" class="form-control" name="repeatpassword" required="true">
                 </div>
                 <label for="exampleInputEmail1">Email address</label>
                 <input type="email" class="form-control" id="exampleInputEmail1" name="email" aria-describedby="emailHelp" placeholder="Enter email" required="true">
+                <div class="mb-3">
+                    <label for="perks_id">Teisės</label>
+                    <select class="form-control form-select" name="user_id">
+                        <?php
+                        $sql = "SELECT * FROM user_perks";
+                        $result = $conn->query($sql);
+                        while ($userRights = mysqli_fetch_array($result)) {
+                            echo "<option value='" . $userRights["name"] . "'>";
+                            echo $userRights["value"];
+                            echo "</option>";
+                        }
+                        ?>
+                    </select>
+                </div>
                 <?php
                 if (isset($message)) { ?>
                     <div class="alert alert-<?php echo $message_status; ?>" role="alert">
-                    <?php echo $message; ?>
-                </div>
+                        <?php echo $message; ?>
+                    </div>
                 <?php } ?>
                 <div class="bottom-action">
-                    <button type="submit" class="btn btn-primary bottom-action" name="submit">Sukurti</button>  
+                    <button type="submit" class="btn btn-primary bottom-action" name="submit">Sukurti</button>
+                    <a href="user.php">Vartotojų sąrašas</a><br>
                 </div>
             </form>
         </div>
 
-    
+
 
     </div>
 </body>
