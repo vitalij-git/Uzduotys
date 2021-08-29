@@ -30,9 +30,10 @@
     }
     if (isset($_POST["submit"])) {
         if (
-            isset($_GET["name"]) && isset($_GET["surname"]) && isset($_GET["perks_id"]) && isset($_GET["birthdate"]) && isset($_GET["email"])
-            && !empty($_GET["name"]) && !empty($_GET["surname"]) && !empty($_GET["perks_id"]) && !empty($_GET["birthdate"]) && !empty($_GET["email"])
+            isset($_POST["name"]) && isset($_POST["surname"]) && isset($_POST["perks_id"]) && isset($_POST["birthdate"]) && isset($_POST["email"])
+            && !empty($_POST["name"]) && !empty($_POST["surname"]) && !empty($_POST["perks_id"]) && !empty($_POST["birthdate"]) && !empty($_POST["email"])
         ) {
+
             $id = $_POST["ID"];
             $username = $_POST["username"];
             $name = $_POST["name"];
@@ -40,25 +41,42 @@
             $birthdate = $_POST["birthdate"];
             $email = $_POST["email"];
             $user_perks = $_POST["user-perks"];
-            $sql = "UPDATE `user` SET `username`='$username',`name`='$name',`surname`='$surname',`birthdate`='$birthdate',`email`='$email',`perks_id`='$user_perks' WHERE ID=$id";
             $result = $conn->query($sql);
-
             $message_status = "danger";
-            // if ($result->num_rows == 1) {
-            //     $message = "toks jau uzimtas";
-            //     $sql = "UPDATE `user` SET `username`='$username',`name`='$name',`surname`='$surname',`birthdate`='$birthdate',`email`='$email',`perks_id`='$user_perks' WHERE ID=$id";
-            //     $result = $conn->query($sql);
+            if ($result->num_rows == 1) {
+                $message = "toks jau uzimtas";
+            } else {
+                $sql = "UPDATE `user` SET `username`='$username',`name`='$name',`surname`='$surname',`birthdate`='$birthdate',`email`='$email',`perks_id`='$user_perks' WHERE ID=$id";
+                $result = $conn->query($sql);
 
+                if (mysqli_query($conn, $sql)) {
+                    $message_status = "success";
+                    $message = "Vartotojas redaguotas sekmingai";
+                } else {
+                    $message = "Kazkas ivyko negerai";
+                }
+            }
+        }
+        else{
+            // $id = $user["ID"];
+            // $username = $user["username"];
+            // $name = $user["name"];
+            // $surname = $user["surname"];
+            // $birthdate = $user["birthdate"];
+            // $email = $user["email"];
+            // $user_perks = $user["user-perks"];
+            // $sql = "UPDATE `user` SET `username`='$username',`name`='$name',`surname`='$surname',`birthdate`='$birthdate',`email`='$email',`perks_id`='$user_perks' WHERE ID=$id";
+            // $result = $conn->query($sql);
             if (mysqli_query($conn, $sql)) {
                 $message_status = "success";
                 $message = "Vartotojas redaguotas sekmingai";
+            } else {
+                $message = "Kazkas ivyko negerai";
             }
-        } else {
-            $message = "Kazkas ivyko negerai";
         }
-        // }
-
     }
+
+
 
     ?>
     <div class="container">
