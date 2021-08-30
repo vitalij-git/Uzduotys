@@ -1,5 +1,6 @@
 <?php
 require_once("connection.php");
+
 require_once("includes.php");
 if (!isset($_COOKIE["login"])) {
     header("Location: index.php");
@@ -8,7 +9,7 @@ if (!isset($_COOKIE["login"])) {
 }
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="lt">
 
 <head>
     <meta charset="UTF-8">

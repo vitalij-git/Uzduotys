@@ -20,7 +20,10 @@ if (!isset($_COOKIE["login"])) {
     <div class="container">
         <?php require_once("includes_menu.php"); ?>
 
+        <?php
+        
 
+?>
     </div>
     <?php }?>
 </body>

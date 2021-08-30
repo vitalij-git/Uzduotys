@@ -28,48 +28,41 @@
             $user = mysqli_fetch_array($result);
         }
     }
-    if (isset($_POST["submit"])) {
+    if (isset($_GET["submit"])) {
         if (
-            isset($_POST["name"]) && isset($_POST["surname"]) && isset($_POST["perks_id"]) && isset($_POST["birthdate"]) && isset($_POST["email"])
-            && !empty($_POST["name"]) && !empty($_POST["surname"]) && !empty($_POST["perks_id"]) && !empty($_POST["birthdate"]) && !empty($_POST["email"])
+            isset($_GET["name"])  && isset($_GET["user-perks"]) && isset($_GET["surname"]) && isset($_GET["email"]) && isset($_GET["birthdate"])
+            && !empty($_GET["name"])  && !empty($_GET["user-perks"]) && !empty($_GET["surname"]) && !empty($_GET["email"]) && !empty($_GET["birthdate"])
         ) {
 
-            $id = $_POST["ID"];
-            $username = $_POST["username"];
-            $name = $_POST["name"];
-            $surname = $_POST["surname"];
-            $birthdate = $_POST["birthdate"];
-            $email = $_POST["email"];
-            $user_perks = $_POST["user-perks"];
+            $id = $_GET["ID"];
+            $name = $_GET["name"];
+            $surname = $_GET["surname"];
+            $birthdate = $_GET["birthdate"];
+            $email = $_GET["email"];
+            $user_perks = $_GET["user-perks"];
             $result = $conn->query($sql);
             $message_status = "danger";
-            if ($result->num_rows == 1) {
-                $message = "toks jau uzimtas";
-            } else {
-                $sql = "UPDATE `user` SET `username`='$username',`name`='$name',`surname`='$surname',`birthdate`='$birthdate',`email`='$email',`perks_id`='$user_perks' WHERE ID=$id";
-                $result = $conn->query($sql);
+            $sql = "UPDATE `user` SET `name`='$name',`surname`='$surname',`birthdate`='$birthdate',`email`='$email',`perks_id`='$user_perks' WHERE ID=$id";
+            $result = $conn->query($sql);
 
-                if (mysqli_query($conn, $sql)) {
-                    $message_status = "success";
-                    $message = "Vartotojas redaguotas sekmingai";
-                } else {
-                    $message = "Kazkas ivyko negerai";
-                }
-            }
-        }
-        else{
-            // $id = $user["ID"];
-            // $username = $user["username"];
-            // $name = $user["name"];
-            // $surname = $user["surname"];
-            // $birthdate = $user["birthdate"];
-            // $email = $user["email"];
-            // $user_perks = $user["user-perks"];
-            // $sql = "UPDATE `user` SET `username`='$username',`name`='$name',`surname`='$surname',`birthdate`='$birthdate',`email`='$email',`perks_id`='$user_perks' WHERE ID=$id";
-            // $result = $conn->query($sql);
             if (mysqli_query($conn, $sql)) {
                 $message_status = "success";
                 $message = "Vartotojas redaguotas sekmingai";
+            } else {
+                $message = "Kazkas ivyko negerai";
+            }
+        } else {
+            $id = $user["ID"];
+            $name = $user["name"];
+            $surname = $user["surname"];
+            $birthdate = $user["birthdate"];
+            $email = $user["email"];
+            $user_perks = $user["perks_id"];
+            $sql = "UPDATE `user` SET `name`='$name',`surname`='$surname',`birthdate`='$birthdate',`email`='$email',`perks_id`='$user_perks' WHERE ID=$id";
+            $result = $conn->query($sql);
+            if (mysqli_query($conn, $sql)) {
+                $message_status = "success";
+                $message = "Vartotojas redaguotas sekmingai1";
             } else {
                 $message = "Kazkas ivyko negerai";
             }
@@ -83,7 +76,7 @@
         <?php require_once("includes_menu.php"); ?>
         <div class="cointainer-block">
             <h1>Redaguoti vartotoja</h1>
-            <form action="userEdit.php" method="post">
+            <form action="userEdit.php" method="GET">
                 <input class="hide" type="text" name="ID" value="<?php echo $user["ID"]; ?>" />
                 <div class="mb-3">
                     <label class="form-label">Name</label>
@@ -97,10 +90,6 @@
                     <label for="birthday">Birthdate:</label>
                     <input type="date" id="birthday" class="form-control" name="birthdate" value="<?php echo $user["birthdate"]; ?>">
                 </div>
-                <div class="mb-3">
-                    <label class="form-label">Username</label>
-                    <input type="text" class="form-control" name="username" value="<?php echo $user["username"]; ?>">
-                </div>
                 <label for="exampleInputEmail1">Email address</label>
                 <input type="email" class="form-control" id="exampleInputEmail1" name="email" aria-describedby="emailHelp" value="<?php echo $user["email"]; ?>">
                 <div class="form-group">
@@ -113,7 +102,7 @@
                             if ($user["perks_id"] == $userRights["name"]) {
                                 echo "<option value='" . $userRights["name"] . "' selected='true'>";
                             } else {
-                                echo "<option value='" . $clientRights["name"] . "'>";
+                                echo "<option value='" . $userRights["name"] . "'>";
                             }
                             echo $userRights["value"];
                             echo "</option>";

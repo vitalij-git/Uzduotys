@@ -51,7 +51,7 @@
         <?php require_once("includes_menu.php"); ?>
         <div class="cointainer-block">
             <h1>Sukurti nauja vartotoja</h1>
-            <form action="register.php" method="post">
+            <form action="addUser.php" method="post">
                 <div class="mb-3">
                     <label class="form-label">Name</label>
                     <input type="text" class="form-control" name="name" required="true">
