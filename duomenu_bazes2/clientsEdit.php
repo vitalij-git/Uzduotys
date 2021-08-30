@@ -103,8 +103,8 @@ if (!isset($_COOKIE["login"])) {
                     ?>
                 </select>
             </div>
-            <a href="clients.php">Klientų sąrašas</a><br>
             <button class="btn btn-primary" type="submit" name="submit">Patvirtinti</button>
+            <a href="clients.php" class="btn btn-primary">Klientų sąrašas</a><br>
         </form>
         <?php if (isset($message)) { ?>
             <div class="alert alert-<?php echo $message_status; ?>" role="alert">

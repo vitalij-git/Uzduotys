@@ -4,6 +4,7 @@ require_once("includes.php");
 if (!isset($_COOKIE["login"])) {
     header("Location: index.php");
 } else {
+    mysqli_set_charset($conn,"utf8");
     $loginArray = explode("|",$_COOKIE["login"]);
 }   
 ?>
@@ -26,7 +27,7 @@ if (!isset($_COOKIE["login"])) {
             $type_id = $_GET["type_id"];
             $description = $_GET["description"];
             $sql = "INSERT INTO `company`( `name`, `type_id`, `value`) 
-        VALUES ('$name','$type_id','$description')";
+            VALUES ('$name','$type_id',' $description')";
             if (mysqli_query($conn, $sql)) {
                 $message =  "Imone pridėta sėkmingai";
                 $message_status = "success";
@@ -41,8 +42,7 @@ if (!isset($_COOKIE["login"])) {
     }
     ?>
     
-<?php if($loginArray[2]==1){?>
-    <?php } ?>
+
     <div class="container">
         <?php require_once("includes_menu.php"); ?>
         <h1>Prideti imone</h1>
@@ -68,10 +68,10 @@ if (!isset($_COOKIE["login"])) {
             </div>
             <div class="form-group">
                 <label for="surname">Aprasymas</label>
-                <input class="form-control" type="text" name="surname" placeholder="Aprasymas" />
+                <input class="form-control" type="text" name="description" placeholder="Aprasymas" />
             </div>
-            <a href="company.php">Imonės sąrašas</a><br>
             <button class="btn btn-primary" type="submit" name="submit">Prideti</button>
+            <a href="company.php" class="btn btn-primary bottom-action">Imonės sąrašas</a><br>
         </form>
         <?php if (isset($message)) { ?>
             <div class="alert alert-<?php echo $message_status; ?>" role="alert">

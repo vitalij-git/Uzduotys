@@ -59,7 +59,7 @@
       </div>
       <div class="bottom-action">
           <button type="submit" class="btn btn-primary bottom-action" name="submit">Sing in</button>
-          <a href="register.php" class="badge badge-primary bottom-action">Sign up</a>
+          <a href="register.php" class="btn btn-primary bottom-action">Sign up</a>
       </div>
     </form>
     

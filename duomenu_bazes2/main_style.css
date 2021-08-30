@@ -12,17 +12,10 @@ h1{
 .container input, .form-select{
     width: 500px !important;
 }
-.bottom-action{
+.bottom-action button,a{
     margin:15px;
-    display: flex;
 }
-a{
-    display: flex !important;
-    justify-content: center;
-    align-items: center;
-    font-size: 100% !important;
 
-}
 button{
     font-weight: bold !important;
 }

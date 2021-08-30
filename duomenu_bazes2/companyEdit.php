@@ -5,6 +5,7 @@ require_once("includes.php");
 if (!isset($_COOKIE["login"])) {
     header("Location: index.php");
 } else {
+    mysqli_set_charset($conn,"utf8");
     $loginArray = explode("|", $_COOKIE["login"]);
 }
 ?>
@@ -73,8 +74,8 @@ if (!isset($_COOKIE["login"])) {
                 <label for="description">Aprasymas</label>
                 <input class="form-control" type="text" name="description" placeholder="Aprasymas" />
             </div>
-            <a href="company.php">Imonės sąrašas</a><br>
             <button class="btn btn-primary" type="submit" name="submit">Prideti</button>
+            <a href="company.php" class="btn btn-primary">Imonės sąrašas</a><br>
         </form>
         <?php if (isset($message)) { ?>
             <div class="alert alert-<?php echo $message_status; ?>" role="alert">

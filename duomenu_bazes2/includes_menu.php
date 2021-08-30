@@ -14,8 +14,10 @@ if (!isset($_COOKIE["login"])) {
 
     @media screen and (min-width: 992px) {
         .navbar-nav-button form {
-            margin-left: 350px;
-            margin-top: 7px;
+            position: absolute;
+            top: 15%;
+            right: 3%;
+
         }
     }
 </style>

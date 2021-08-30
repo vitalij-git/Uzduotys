@@ -1,4 +1,18 @@
-<?php require_once("connection.php"); ?>
+<?php require_once("connection.php"); 
+
+$sql = "SELECT  `value` FROM `registration_status` WHERE 1";
+    $result = $conn->query($sql);
+        if ($result->num_rows == 1) {
+            $user = mysqli_fetch_array($result);
+            if ($user["value"] == 0) {
+             header("location: Error404.php");
+            }
+        } else {
+            $message = "Kazkas ivyko negerai";
+            $message_status = "danger";
+        }
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -6,7 +20,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="main_style.css">
     <?php require_once("includes.php"); ?>
     <title>Document</title>
 </head>
@@ -88,7 +102,7 @@
 
             <div class="bottom-action">
                 <button type="submit" class="btn btn-primary" name="submit">Sign up</button>
-                <a href="index.php" class="badge badge-primary">Sign in</a>
+                <a href="index.php" class="btn btn-primary">Sign in</a>
             </div>
         </form>
 

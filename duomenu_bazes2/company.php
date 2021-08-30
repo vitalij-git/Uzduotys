@@ -5,6 +5,7 @@ if (!isset($_COOKIE["login"])) {
     header("Location: index.php");
 } else {
     $loginArray = explode("|",$_COOKIE["login"]);
+    mysqli_set_charset($conn,"utf8");
 }   
 ?>
 <!DOCTYPE html>
@@ -16,7 +17,7 @@ if (!isset($_COOKIE["login"])) {
     <title>Document</title>
 </head>
 <body>
-<?php if($loginArray[2]==1){?>
+<?php if($loginArray[2]==1 || $loginArray[2]==2 || $loginArray[2]==4){?>
     <div class="container">
         <?php require_once("includes_menu.php"); ?>
         <form action="newCompany.php" method="get">
@@ -33,7 +34,7 @@ if (!isset($_COOKIE["login"])) {
                 <tr>
                     <th scope="col">ID</th>
                     <th scope="col">Pavadinimas</th>
-                    <th scope="col">tipas</th>
+                    <th scope="col">Tipas</th>
                     <?php if ($loginArray[2] == 1 || $loginArray[2] == 2 || $loginArray[2] == 4) { ?>
                         <th scope="col">Veiksmai</th>
                     <?php } ?>
@@ -46,24 +47,16 @@ if (!isset($_COOKIE["login"])) {
                 } else {
                     $sorting = "DESC";
                 }
-                $sql = "SELECT * FROM `company` ORDER BY `ID` $sorting";
+                $sql = "SELECT company.ID, company.name, company_type.value FROM company
+                LEFT JOIN company_type ON company_type.ID = company.type_id  
+                Where 1 
+                ORDER BY `ID` $sorting";
                 $result = $conn->query($sql);
                 while ($company = mysqli_fetch_array($result)) {
                     echo "<tr>";
                     echo "<td>" . $company["ID"] . "</td>";
                     echo "<td>" . $company["name"] . "</td>";
-                    $type_id = $company["type_id"];
-                    $sql = "SELECT * FROM `company_type` WHERE name = $type_id";
-                    $result_type = $conn->query($sql);
-
-                    if ($result_type->num_rows == 1) {
-                        $type = mysqli_fetch_array($result_type);
-                        echo "<td>";
-                        echo $type["value"];
-                        echo "</td>";
-                    } else {
-                        echo "<td>Nepatvirtinta imone</td>";
-                    }
+                    echo "<td>" . $company["value"] . "</td>";
                     if ($loginArray[2] == 1 || $loginArray[2] == 2 || $loginArray[2] == 4) {
                         echo "<td>";
                         echo "<a href='company.php?ID=" . $company["ID"] . "'>Trinti</a><br>";

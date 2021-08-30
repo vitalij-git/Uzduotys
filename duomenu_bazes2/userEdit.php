@@ -118,7 +118,7 @@
                 <?php } ?>
                 <div class="bottom-action">
                     <button type="submit" class="btn btn-primary bottom-action" name="submit">Patvirtinti</button>
-                    <a href="user.php">Vartotojų sąrašas</a><br>
+                    <a href="user.php" class="btn btn-primary bottom-action">Vartotojų sąrašas</a><br>
                 </div>
             </form>
         </div>
