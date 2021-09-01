@@ -1,0 +1,18 @@
+.container input, select{
+    width: 500px !important;
+}
+.pages{
+    display: flex;
+    justify-content: center;
+    margin: 10px;
+}
+.pages a{
+    margin: 4px;
+    font-size:larger;
+}
+.sorting h3, .sorting button{
+    margin: 10px;
+}
+.sorting-filter{
+    display: flex;
+}

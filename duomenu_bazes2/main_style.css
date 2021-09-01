@@ -4,18 +4,20 @@
 h1{
     display: flex;
     text-align: center;
+    
 }
 .container{
     margin-top: 5%;
 
 }
-.container input, .form-select{
-    width: 500px !important;
-}
+
 .bottom-action button,a{
     margin:15px;
 }
 
 button{
     font-weight: bold !important;
+}
+.header-fullname{
+    text-align: center;
 }

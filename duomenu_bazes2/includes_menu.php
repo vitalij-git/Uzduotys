@@ -35,6 +35,9 @@ if (!isset($_COOKIE["login"])) {
             <a class="nav-item nav-link" href="company.php">Imones</a>
             <a class="nav-item nav-link" href="myAccount.php">Mano paskyra</a>
         </div>
+        <?php if ($loginArray[2] == 3 ) { ?>
+                <a class="nav-item nav-link" href="loginHistory.php">Istorija </a>
+            <?php } ?>
         <div class="navbar-nav-button" class="navbar-nav">
             <form action="clients.php" method="post">
                 <button type="submit" class="btn btn-primary" name="logout">Atsijungti</button>

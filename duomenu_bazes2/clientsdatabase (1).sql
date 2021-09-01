@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Aug 30, 2021 at 05:19 PM
+-- Generation Time: Aug 31, 2021 at 10:25 PM
 -- Server version: 5.7.31
 -- PHP Version: 7.3.21
 
@@ -233,23 +233,13 @@ INSERT INTO `clients` (`ID`, `name`, `surname`, `date_joined`, `perks_id`) VALUE
 (190, 'vardas190', 'pavarde190', '2021-08-21', 1),
 (191, 'vardas191', 'pavarde191', '2021-08-21', 3),
 (192, 'vardas192', 'pavarde192', '2021-08-21', 0),
-(193, 'vardas193', 'pavarde193', '2021-08-21', 0),
+(193, 'vardas193', 'pavarde193', '2021-08-21', 2),
 (194, 'vardas194', 'pavarde194', '2021-08-21', 0),
 (195, 'vardas195', 'pavarde195', '2021-08-21', 0),
 (196, 'vardas196', 'pavarde196', '2021-08-21', 3),
 (197, 'vardas197', 'pavarde197', '2021-08-21', 2),
 (198, 'vardas198', 'pavarde198', '2021-08-21', 2),
-(199, 'vardas199', 'pavarde199', '2021-08-21', 3),
-(200, 'vardas200', 'pavarde200', '2021-08-21', 2),
-(202, 'admin', 'Piter', '2021-08-06', 1),
-(203, 'admin', 'Piter', '2021-08-06', 2),
-(204, 'admin', 'Piter', '2021-08-14', 0),
-(205, 'admin', 'Piter', '2021-08-30', 0),
-(206, 'admin', 'Piter', '2021-08-30', 0),
-(207, 'admin', 'Piter', '2021-08-30', 0),
-(208, 'admin', 'Piter', '2021-08-30', 0),
-(209, 'admin', 'Piter', '2021-08-30', 0),
-(210, 'John', 'Piter', '2021-08-30', 0);
+(203, 'admin', 'Piter', '2021-08-06', 2);
 
 -- --------------------------------------------------------
 
@@ -289,14 +279,15 @@ CREATE TABLE IF NOT EXISTS `company` (
   `type_id` int(4) NOT NULL,
   `value` varchar(120) COLLATE utf8_lithuanian_ci NOT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_lithuanian_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_lithuanian_ci;
 
 --
 -- Dumping data for table `company`
 --
 
 INSERT INTO `company` (`ID`, `name`, `type_id`, `value`) VALUES
-(1, 'kavine', 2, 'kava ir uzkandziai');
+(1, 'kavine', 2, 'kava ir uzkandziai'),
+(2, 'vasara', 3, 'vasaros festivaliai');
 
 -- --------------------------------------------------------
 
@@ -310,7 +301,7 @@ CREATE TABLE IF NOT EXISTS `company_type` (
   `name` varchar(120) COLLATE utf8_lithuanian_ci NOT NULL,
   `value` varchar(120) COLLATE utf8_lithuanian_ci NOT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_lithuanian_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_lithuanian_ci;
 
 --
 -- Dumping data for table `company_type`
@@ -320,6 +311,46 @@ INSERT INTO `company_type` (`ID`, `name`, `value`) VALUES
 (1, 'MB', 'Mažoji Bendrija'),
 (2, 'UAB', 'Uždaroji akcinė bendrovė'),
 (3, 'AB', 'Akcinė bendrovė');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `image`
+--
+
+DROP TABLE IF EXISTS `image`;
+CREATE TABLE IF NOT EXISTS `image` (
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `Filename` varchar(100) COLLATE utf8_lithuanian_ci NOT NULL,
+  PRIMARY KEY (`ID`)
+) ENGINE=MyISAM AUTO_INCREMENT=28 DEFAULT CHARSET=utf8 COLLATE=utf8_lithuanian_ci;
+
+--
+-- Dumping data for table `image`
+--
+
+INSERT INTO `image` (`ID`, `Filename`) VALUES
+(26, 'image.jpg');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `registration_status`
+--
+
+DROP TABLE IF EXISTS `registration_status`;
+CREATE TABLE IF NOT EXISTS `registration_status` (
+  `ID` int(4) NOT NULL AUTO_INCREMENT,
+  `value` int(2) NOT NULL,
+  PRIMARY KEY (`ID`)
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_lithuanian_ci;
+
+--
+-- Dumping data for table `registration_status`
+--
+
+INSERT INTO `registration_status` (`ID`, `value`) VALUES
+(1, 1);
 
 -- --------------------------------------------------------
 
@@ -345,10 +376,9 @@ CREATE TABLE IF NOT EXISTS `user` (
 --
 
 INSERT INTO `user` (`ID`, `username`, `password`, `name`, `surname`, `birthdate`, `email`, `perks_id`) VALUES
-(4, 'admin', 'admin', 'Kay', 'Ko', '1990-03-04', 'keyko@gmail.com', 1),
+(4, 'admin', '123', 'Kay', 'Ko', '1990-03-04', 'keyko123@gmail.com', 1),
 (5, 'antom', '12345', 'Antony', 'Piter', '1991-06-12', 'antony@fu.com', 2),
 (7, 'alana', 'alana', 'Alana', 'Walker', '1992-05-01', 'alana@gmail.com', 3),
-(8, 'koi', 'koi', 'Koi', 'Kai', '2021-09-21', 'koi@koi.com', 4),
 (9, 'jon', 'jon', 'jong', 'jn', '2021-06-16', 'jon@gmail.com', 3),
 (10, 'sadmin', '12345', 'sadmin', 'sadmin', '2021-07-29', 'sadmin@gmail.com', 3),
 (13, 'vadyba', '123', 'Jonas', 'Jokubaitis', '1990-03-04', 'jonas@gmail.com', 4);

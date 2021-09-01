@@ -62,7 +62,7 @@
             $result = $conn->query($sql);
             if (mysqli_query($conn, $sql)) {
                 $message_status = "success";
-                $message = "Vartotojas redaguotas sekmingai1";
+                $message = "Vartotojas redaguotas sekmingai";
             } else {
                 $message = "Kazkas ivyko negerai";
             }

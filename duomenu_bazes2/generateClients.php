@@ -23,7 +23,7 @@ class Klientas
 
 $klientai = array();
 for ($i = 0; $i < 200; $i++) {
-    array_push($klientai, new Klientas("vardas" . ($i + 1), "pavarde" . ($i + 1), rand(0, 4), getdate()));
+    array_push($klientai, new Klientas("vardas" . ($i + 1), "pavarde" . ($i + 1), rand(1, 5), getdate()));
     //$sql="INSERT INTO klientai(vardas, pavarde, teises_id) VALUES ('vardas.($i+1)','pavarde.($i+1)',rand(1,10))";
 }
 if (isset($_GET["generate"])) {
