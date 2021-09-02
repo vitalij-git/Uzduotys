@@ -47,6 +47,7 @@ if (isset($_GET["page-limit"])) {
             </form>
         <?php } ?>
 
+
         <div class="col-lg-6 col-md-3 sorting">
             <h3>Rikiavimas ir filtravimas</h3>
             <form action="clients.php" method="get">
@@ -54,25 +55,18 @@ if (isset($_GET["page-limit"])) {
                     <?php
                     $sql = "SELECT * FROM `clients_sorting`";
                     $result = $conn->query($sql);
-
                     $sorting_column = array();
-
                     $skaitiklis = 1;
                     while ($sortColumns = mysqli_fetch_array($result)) {
-
                         if ($skaitiklis == 1) {
-                            $numatytoji_reiksme = $sortColumns["ID"]; 
+                            $numatytoji_reiksme = $sortColumns["ID"];
                         }
-
-
                         if (isset($_GET["sorting-by"]) && $_GET["sorting-by"] == $sortColumns["ID"]) {
                             echo "<option value='" . $sortColumns["ID"] . "' selected='true'>" . $sortColumns["sorting_name"] . "</option>";
                         } else {
                             echo "<option value='" . $sortColumns["ID"] . "'>" . $sortColumns["sorting_name"] . "</option>";
                         }
-
                         $sorting_column[$sortColumns["ID"]] =  $sortColumns["sorting_column"];
-
                         $skaitiklis++;
                     }
                     ?>
@@ -92,11 +86,9 @@ if (isset($_GET["page-limit"])) {
                     <?php } else { ?>
                         <option value="default" selected="true">Rodyti visus</option>
                     <?php } ?>
-
                     <?php
                     $sql = "SELECT * FROM clients_perks";
                     $result = $conn->query($sql);
-
                     while ($clientRights = mysqli_fetch_array($result)) {
                         if (isset($_GET["filter-id"]) && $_GET["filter-id"] == $clientRights["name"]) {
                             echo "<option value='" . $clientRights["name"] . "' selected='true'>";
@@ -108,12 +100,19 @@ if (isset($_GET["page-limit"])) {
                     }
                     ?>
                 </select>
-                <button class="btn btn-primary" name="vykdyti" type="submit">Vykdyti</button>
-            </form>
         </div>
-        <?php   if(isset($_GET["filter-id"]) && !empty($_GET["filter-id"]) && $_GET["filter-id"] != "default") { ?>
-            <a class="btn btn-primary" href="clients.php">Išvalyti filtrą</a>
-        <?php } ?>
+        <div class="top-action">
+            <div>
+                <button class="btn btn-primary" name="vykdyti" type="submit">Vykdyti</button>
+                </form>
+
+            </div>
+            <div>
+                <?php if (isset($_GET["filter-id"]) && !empty($_GET["filter-id"]) && $_GET["filter-id"] != "default") { ?>
+                    <a class="btn btn-primary" href="clients.php">Išvalyti filtrą</a>
+                <?php } ?>
+            </div>
+        </div>
         <?php if (isset($message)) { ?>
             <div class="alert alert-<?php echo $message_status; ?>" role="alert">
                 <?php echo $message; ?>

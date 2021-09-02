@@ -10,7 +10,21 @@
     
     ';
     ?>
-
+    <?php
+    $result = mysqli_query($conn, "SELECT * FROM image WHERE ID=26");
+    while ($data = mysqli_fetch_array($result)) { ?>
+        <style>
+            .container {
+                background-image: url(<?php echo $data['Filename']; ?>);
+                background-repeat: no-repeat;
+                height: 100%;
+                background-position: center;
+                background-size: cover;
+            }
+        </style>
+    <?php
+    }
+    ?>
     <?php
     $result = mysqli_query($conn, "SELECT * FROM image");
     while ($data = mysqli_fetch_array($result)) { ?>

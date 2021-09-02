@@ -10,9 +10,15 @@
     margin: 4px;
     font-size:larger;
 }
-.sorting h3, .sorting button{
+.sorting select{
     margin: 10px;
 }
 .sorting-filter{
     display: flex;
+}
+.top-action{
+    display: flex;
+}
+.top-action button, .top-action a{
+    margin: 10px;
 }

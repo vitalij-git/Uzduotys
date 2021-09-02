@@ -127,12 +127,13 @@ if (!isset($_COOKIE["login"])) {
 
         $folder = $filename;
 
-        $sql = "INSERT INTO image (filename) VALUES ('$filename')";
-
+        // $sql = "UPDATE INTO image (filename) VALUES ('$filename') WHERE ID=26";
+        $sql = "UPDATE `image` SET `Filename`='$filename' WHERE ID=26";
         mysqli_query($conn, $sql);
         if (move_uploaded_file($tempname, $folder)) {
             $message = "Image uploaded successfully";
             $message_status = "success";
+            header("location: myAccount.php");
         } else {
             $message = "Failed to upload image";
         }
@@ -175,14 +176,7 @@ if (!isset($_COOKIE["login"])) {
                 </div>
             </form>
 
-            <?php
-            $result = mysqli_query($conn, "SELECT * FROM image");
-            while ($data = mysqli_fetch_array($result)) { ?>
-                <img src="<?php echo $data['Filename']; ?>">
-
-            <?php
-            }
-            ?>
+            
         <?php
         }
         ?>

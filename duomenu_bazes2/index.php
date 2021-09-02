@@ -14,7 +14,7 @@ require_once("connection.php");
     <title>Document</title>
 </head>
 
-<body>
+<body >
 
     <?php
     if (isset($_COOKIE["login"])) {
