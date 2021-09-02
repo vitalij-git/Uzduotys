@@ -37,7 +37,7 @@ if (isset($_GET["page-limit"])) {
 ?>
 
 <body>
-    
+
     <div class="container">
 
         <?php require_once("includes_menu.php"); ?>
@@ -46,46 +46,74 @@ if (isset($_GET["page-limit"])) {
                 <button type="submit" class="btn btn-primary">Prideti klienta</button>
             </form>
         <?php } ?>
-        <div class="sorting-filter">
-            <div class="col-lg-6 col-md-3 sorting">
-                <h3>Rikiavimas</h3>
-                <form action="clients.php" method="get">
-                    <div class="form-group ">
-                        <select class="form-control" name="sorting-id">
-                            <option value="DESC"> Nuo didžiausio iki mažiausio</option>
-                            <option value="ASC"> Nuo mažiausio iki didžiausio</option>
-                        </select>
-                        <button class="btn btn-primary" name="sorting-submit" type="submit-sorting">Rikiuoti</button>
-                    </div>
-                </form>
-            </div>
-            <div class="sorting"> 
-                <h3>Filtravimas</h3>
-                <form action="clients.php" method="get">
-                    <select class="form-control" name="filter-id">
-                        <?php if (isset($_GET["filter-id"]) && !empty($_GET["filter-id"]) && $_GET["filter-id"] != "default") { ?>
-                            <option value="default">Rodyti visus</option>
-                        <?php } else { ?>
-                            <option value="default" selected="true">Rodyti visus</option>
-                        <?php } ?>
-                        <?php
-                        $sql = "SELECT * FROM clients_perks";
-                        $result = $conn->query($sql);
-                        while ($clientRights = mysqli_fetch_array($result)) {
-                            if (isset($_GET["filter-id"]) && $_GET["filter-id"] == $clientRights["name"]) {
-                                echo "<option value='" . $clientRights["name"] . "' selected='true'>";
-                            } else {
-                                echo "<option value='" . $clientRights["name"] . "'>";
-                            }
-                            echo $clientRights["value"];
-                            echo "</option>";
+
+        <div class="col-lg-6 col-md-3 sorting">
+            <h3>Rikiavimas ir filtravimas</h3>
+            <form action="clients.php" method="get">
+                <select class="form-control" name="sorting-by">
+                    <?php
+                    $sql = "SELECT * FROM `clients_sorting`";
+                    $result = $conn->query($sql);
+
+                    $sorting_column = array();
+
+                    $skaitiklis = 1;
+                    while ($sortColumns = mysqli_fetch_array($result)) {
+
+                        if ($skaitiklis == 1) {
+                            $numatytoji_reiksme = $sortColumns["ID"]; 
                         }
-                        ?>
-                    </select>
-                    <button class="btn btn-primary" name="filtruoti" type="submit">Filtruoti</button>
-                </form>
-            </div>
+
+
+                        if (isset($_GET["sorting-by"]) && $_GET["sorting-by"] == $sortColumns["ID"]) {
+                            echo "<option value='" . $sortColumns["ID"] . "' selected='true'>" . $sortColumns["sorting_name"] . "</option>";
+                        } else {
+                            echo "<option value='" . $sortColumns["ID"] . "'>" . $sortColumns["sorting_name"] . "</option>";
+                        }
+
+                        $sorting_column[$sortColumns["ID"]] =  $sortColumns["sorting_column"];
+
+                        $skaitiklis++;
+                    }
+                    ?>
+                </select>
+                <select class="form-control" name="sorting_id">
+                    <?php if ((isset($_GET["sorting_id"]) && $_GET["sorting_id"] == "DESC") || !isset($_GET["sorting_id"])) {  ?>
+                        <option value="DESC" selected="true"> Nuo didžiausio iki mažiausio</option>
+                        <option value="ASC"> Nuo mažiausio iki didžiausio</option>
+                    <?php } else { ?>
+                        <option value="DESC"> Nuo didžiausio iki mažiausio</option>
+                        <option value="ASC" selected="true"> Nuo mažiausio iki didžiausio</option>
+                    <?php } ?>
+                </select>
+                <select class="form-control" name="filter-id">
+                    <?php if (isset($_GET["filter-id"]) && !empty($_GET["filter-id"]) && $_GET["filter-id"] != "default") { ?>
+                        <option value="default">Rodyti visus</option>
+                    <?php } else { ?>
+                        <option value="default" selected="true">Rodyti visus</option>
+                    <?php } ?>
+
+                    <?php
+                    $sql = "SELECT * FROM clients_perks";
+                    $result = $conn->query($sql);
+
+                    while ($clientRights = mysqli_fetch_array($result)) {
+                        if (isset($_GET["filter-id"]) && $_GET["filter-id"] == $clientRights["name"]) {
+                            echo "<option value='" . $clientRights["name"] . "' selected='true'>";
+                        } else {
+                            echo "<option value='" . $clientRights["name"] . "'>";
+                        }
+                        echo $clientRights["value"];
+                        echo "</option>";
+                    }
+                    ?>
+                </select>
+                <button class="btn btn-primary" name="vykdyti" type="submit">Vykdyti</button>
+            </form>
         </div>
+        <?php   if(isset($_GET["filter-id"]) && !empty($_GET["filter-id"]) && $_GET["filter-id"] != "default") { ?>
+            <a class="btn btn-primary" href="clients.php">Išvalyti filtrą</a>
+        <?php } ?>
         <?php if (isset($message)) { ?>
             <div class="alert alert-<?php echo $message_status; ?>" role="alert">
                 <?php echo $message; ?>
@@ -106,15 +134,14 @@ if (isset($_GET["page-limit"])) {
             </thead>
             <tbody>
                 <?php
-                 if(isset($_GET["filter-id"]) && !empty($_GET["filter-id"]) && $_GET["filter-id"] != "default") {
-                    $filter = "clients.perks_id =" .$_GET["filter-id"];
+                if (isset($_GET["filter-id"]) && !empty($_GET["filter-id"]) && $_GET["filter-id"] != "default") {
+                    $filter = "clients.perks_id =" . $_GET["filter-id"];
                 } else {
                     $filter = 1;
                 }
 
                 if (isset($_GET["sorting-id"]) && !empty($_GET["sorting-id"])) {
                     $sorting = $_GET["sorting-id"];
-                  
                 } else {
                     $sorting = "DESC";
                 }

@@ -33,10 +33,12 @@ require_once("connection.php");
                     $user_info["username"],
                     $user_info["perks_id"]
                 ); 
-                $today = getdate();
-                $today = date("Y-m-d H:i:s");
+                $date = new DateTime(null, new DateTimeZone('Europe/Vilnius'));
+                var_dump($date);
+                $nowDate = $date->date;
+                echo $nowDate;
                 $sql = "INSERT INTO `login_history`(`username`, `user_perks_id`, `date`) 
-                VALUES ('$cookie_array[1]', '$cookie_array[2]','$today')";
+                VALUES ('$cookie_array[1]', '$cookie_array[2]','$nowDate')";
                 if (mysqli_query($conn, $sql)) {
                 } 
                 $cookie_array = implode("|", $cookie_array);

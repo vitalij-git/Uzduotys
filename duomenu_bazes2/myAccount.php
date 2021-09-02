@@ -174,19 +174,18 @@ if (!isset($_COOKIE["login"])) {
                     <button type="submit" class="btn btn-primary bottom-action" name="upload" value="">Siusti</button>
                 </div>
             </form>
-            <?php
-             }
-             ?>
+
             <?php
             $result = mysqli_query($conn, "SELECT * FROM image");
-            while($data = mysqli_fetch_array($result))
-            {?>  
-             <img src="<?php echo $data['Filename']; ?>">
-  
-             <?php
-             }
-             ?>
+            while ($data = mysqli_fetch_array($result)) { ?>
+                <img src="<?php echo $data['Filename']; ?>">
 
+            <?php
+            }
+            ?>
+        <?php
+        }
+        ?>
 
         <?php if ($profile == 2) { ?>
             <h2>Informacijos keitimas
