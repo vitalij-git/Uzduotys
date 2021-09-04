@@ -37,8 +37,9 @@ if (!isset($_COOKIE["login"])) {
             }
            
             $date = $year.'-'.$mon.'-'.$day; 
-            $sql = "INSERT INTO `clients`( `name`, `surname`, `date_joined`, `perks_id`) 
-     VALUES ('$name','$surname','$date','$perks')";
+            $description = $_GET["description"];
+            $sql = "INSERT INTO `clients`( `name`, `surname`, `date_joined`, `perks_id`, `description`) 
+     VALUES ('$name','$surname','$date','$perks','$description')";
             if (mysqli_query($conn, $sql)) {
                 $message =  "Vartotojas pridėtas sėkmingai";
                 $message_status = "success";
@@ -67,10 +68,6 @@ if (!isset($_COOKIE["login"])) {
                 <label for="surname">Pavardė</label>
                 <input class="form-control" type="text" name="surname" placeholder="Pavarde" />
             </div>
-            <!-- <div class="form-group">
-                <label for="date">Data</label>
-                <input class="form-control" type="date" name="date" placeholder="data" />
-            </div> -->
             <div class="form-group">
                 <label for="perks_id">Teisės</label>
                 <select class="form-control" name="perks_id">
@@ -85,8 +82,15 @@ if (!isset($_COOKIE["login"])) {
                     ?>
                 </select>
             </div>
-            <button class="btn btn-primary" type="submit" name="submit">Naujas klientas</button>
-            <a href="clients.php" class="btn btn-primary">Klientų sąrašas</a><br>
+            <div class="row">
+                <div class="col-lg-12">
+                    <textarea class="form-control" id ="description" name="description"></textarea>
+                </div>
+            </div>
+            <div class="btn-action">
+                <button class="btn btn-primary " type="submit" name="submit">Naujas klientas</button>
+                <a href="clients.php" class="btn btn-primary">Klientų sąrašas</a><br>
+            </div>
         </form>
         <?php if (isset($message)) { ?>
             <div class="alert alert-<?php echo $message_status; ?>" role="alert">
@@ -95,5 +99,4 @@ if (!isset($_COOKIE["login"])) {
         <?php } ?>
     </div>
 </body>
-
 </html>

@@ -29,7 +29,7 @@ if (!isset($_COOKIE["login"])) {
     }
 }
 if (isset($_GET["page-limit"])) {
-    $page_limit = $_GET["page-limit"] * 15 - 15;
+    $page_limit = $_GET["page-limit"] * 30 - 30;
 } else {
     $page_limit = 0;
 }
@@ -126,6 +126,7 @@ if (isset($_GET["page-limit"])) {
                     <th scope="col">Pavardė</th>
                     <th scope="col">Prisijungimo data</th>
                     <th scope="col">Teisės</th>
+                    <th scope="col">Aprašymas</th>
                     <?php if ($loginArray[2] == 1 || $loginArray[2] == 2 || $loginArray[2] == 4) { ?>
                         <th scope="col">Veiksmai</th>
                     <?php } ?>
@@ -145,12 +146,19 @@ if (isset($_GET["page-limit"])) {
                     $sorting = "DESC";
                 }
 
-                $sql = "SELECT clients.ID, clients.name, clients.surname, clients.date_joined, clients_perks.value FROM clients
+                $sql = "SELECT clients.ID, clients.name, clients.surname, 
+                clients.date_joined, clients_perks.value,clients.description FROM clients
                 LEFT JOIN clients_perks ON clients_perks.name = clients.perks_id  
                 Where $filter
                 ORDER BY `ID` $sorting
-                LIMIT $page_limit , 15";
+                LIMIT $page_limit , 30";
                 $result = $conn->query($sql);
+               
+                // var_dump($result);
+                // if ($result->num_rows == 1) {
+                // $sql_pages="UPDATE `pages` SET `total_clients`=[value-2] WHERE 1";
+
+                // }
                 while ($clients = mysqli_fetch_array($result)) {
                     echo "<tr>";
                     echo "<td>" . $clients["ID"] . "</td>";
@@ -158,6 +166,7 @@ if (isset($_GET["page-limit"])) {
                     echo "<td>" . $clients["surname"] . "</td>";
                     echo "<td>" . $clients["date_joined"] . "</td>";
                     echo "<td>" . $clients["value"] . "</td>";
+                    echo "<td>" . $clients["description"] . "</td>";
                     if ($loginArray[2] == 1 || $loginArray[2] == 2 || $loginArray[2] == 4) {
                         echo "<td>";
                         echo "<a href='clients.php?ID=" . $clients["ID"] . "'>Trinti</a><br>";
@@ -166,13 +175,15 @@ if (isset($_GET["page-limit"])) {
                     }
                     echo "</tr>";
                 }
+                
                 ?>
             </tbody>
         </table>
         <div class="pages">
-            <?php
-            $sql = "SELECT CEILING(COUNT(ID)/15), COUNT(ID) FROM clients";
+             <?php
+            $sql = "SELECT CEILING(COUNT(ID)/30), COUNT(ID) FROM clients";
             $result = $conn->query($sql);
+          
             if ($result->num_rows == 1) {
                 $clients_total_pages = mysqli_fetch_array($result);
 
@@ -182,10 +193,19 @@ if (isset($_GET["page-limit"])) {
                     echo " ";
                     echo "</a>";
                 }
+                // echo "<p>";
+                // echo "Is viso puslapiu: ";
+                // echo $clients_total_pages[0];
+                // echo "</p>";
+    
+                // echo "<p>";
+                // echo "Is viso klientu: ";
+                // echo $clients_total_pages[1];
+                // echo "</p>";
             } else {
                 echo "Nepavyko suskaiciuoti klientu";
             }
-            ?>
+            ?> 
         </div>
     </div>
 

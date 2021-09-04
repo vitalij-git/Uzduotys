@@ -34,7 +34,6 @@ require_once("connection.php");
                     $user_info["perks_id"]
                 ); 
                 $date = new DateTime(null, new DateTimeZone('Europe/Vilnius'));
-                var_dump($date);
                 $nowDate = $date->date;
                 echo $nowDate;
                 $sql = "INSERT INTO `login_history`(`username`, `user_perks_id`, `date`) 

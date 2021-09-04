@@ -4,6 +4,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link href="dist/summernote.min.css" rel="stylesheet">
+    <script src="dist/summernote.min.js"></script>
     <link rel="stylesheet" href="joint.css">
     <script src="assets/js/main.js"></script> 
     
@@ -17,20 +19,8 @@
             .container {
                 background-image: url(<?php echo $data['Filename']; ?>);
                 background-repeat: no-repeat;
-                height: 100%;
                 background-position: center;
                 background-size: cover;
-            }
-        </style>
-    <?php
-    }
-    ?>
-    <?php
-    $result = mysqli_query($conn, "SELECT * FROM image");
-    while ($data = mysqli_fetch_array($result)) { ?>
-        <style>
-            body {
-                background-image: url("<?php $data['Filename'] ?>");
             }
         </style>
     <?php
@@ -43,7 +33,5 @@
             display: none;
         }
 
-        body {
-            background-image: url("<?php $data['Filename'] ?>");
-        }
+     
     </style>

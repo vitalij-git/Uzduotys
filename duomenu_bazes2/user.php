@@ -38,9 +38,11 @@ if (!isset($_COOKIE["login"])) {
     ?>
     <div class="container">
         <?php require_once("includes_menu.php"); ?>
-        <form action="addUser.php" method="get">
-            <button type="submit" class="btn btn-primary">Prideti vartotoja</button>
-        </form>
+        <div class="add-user-button-form">
+            <form action="addUser.php" method="get">
+                <button type="submit" class="btn btn-primary">Prideti vartotoja</button>
+            </form>
+        </div>
         <?php if ($loginArray[2] == 1) {
             $sql = "SELECT `ID`, `value` FROM `registration_status` WHERE 1";
             $result = $conn->query($sql);

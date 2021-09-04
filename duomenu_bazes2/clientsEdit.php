@@ -42,7 +42,8 @@ if (!isset($_COOKIE["login"])) {
             $name = $_GET["name"];
             $surname = $_GET["surname"];
             $perks = intval($_GET["perks_id"]);
-            $sql = "UPDATE `clients` SET `name`='$name',`surname`='$surname',`perks_id`='$perks' WHERE ID = $id";
+            $description =$_GET["description"];
+            $sql = "UPDATE `clients` SET `name`='$name',`surname`='$surname',`perks_id`='$perks',`description`='$description' WHERE ID = $id";
             if (mysqli_query($conn, $sql)) {
                 $message =  "Klientas atnaujintas";
                 $message_status = "success";
@@ -103,8 +104,15 @@ if (!isset($_COOKIE["login"])) {
                     ?>
                 </select>
             </div>
-            <button class="btn btn-primary" type="submit" name="submit">Patvirtinti</button>
-            <a href="clients.php" class="btn btn-primary">Klientų sąrašas</a><br>
+            <div class="row">
+                <div class="col-lg-12">
+                    <textarea class="form-control" id ="description" name="description"></textarea>
+                </div>
+            </div>
+            <div class="btn-action">
+                <button class="btn btn-primary" type="submit" name="submit">Patvirtinti</button>
+                <a href="clients.php" class="btn btn-primary">Klientų sąrašas</a><br>
+            </div>
         </form>
         <?php if (isset($message)) { ?>
             <div class="alert alert-<?php echo $message_status; ?>" role="alert">

@@ -22,3 +22,13 @@
 .top-action button, .top-action a{
     margin: 10px;
 }
+ .btn-action{
+    margin-top: 10px;
+   padding-bottom: 20px;
+}
+form{
+    margin-block-end: 0;
+}
+.add-user-button-form{
+    margin-bottom: 10px;
+}
