@@ -28,11 +28,6 @@ if (!isset($_COOKIE["login"])) {
         $message_status = "danger";
     }
 }
-if (isset($_GET["page-limit"])) {
-    $page_limit = $_GET["page-limit"] * 30 - 30;
-} else {
-    $page_limit = 0;
-}
 
 ?>
 
@@ -134,7 +129,14 @@ if (isset($_GET["page-limit"])) {
             </thead>
             <tbody>
                 <?php
-                if (isset($_GET["filter-id"]) && !empty($_GET["filter-id"]) && $_GET["filter-id"] != "default") {
+                $clients_count = 30;
+                $pagination_url = "";
+                if (isset($_GET["page-limit"])) {
+                    $page_limit = $_GET["page-limit"] * $clients_count - $clients_count;
+                } else {
+                    $page_limit = 0;
+                }
+                if (isset($_GET["filter-id"]) && !empty($_GET["filter-id"])) {
                     $filter = "clients.perks_id =" . $_GET["filter-id"];
                 } else {
                     $filter = 1;
@@ -151,9 +153,9 @@ if (isset($_GET["page-limit"])) {
                 LEFT JOIN clients_perks ON clients_perks.name = clients.perks_id  
                 Where $filter
                 ORDER BY `ID` $sorting
-                LIMIT $page_limit , 30";
+                LIMIT $page_limit , $clients_count ";
                 $result = $conn->query($sql);
-               
+
                 // var_dump($result);
                 // if ($result->num_rows == 1) {
                 // $sql_pages="UPDATE `pages` SET `total_clients`=[value-2] WHERE 1";
@@ -175,20 +177,27 @@ if (isset($_GET["page-limit"])) {
                     }
                     echo "</tr>";
                 }
-                
+
                 ?>
             </tbody>
         </table>
         <div class="pages">
-             <?php
-            $sql = "SELECT CEILING(COUNT(ID)/30), COUNT(ID) FROM clients";
+            <?php
+            $sql = "SELECT CEILING(COUNT(ID)/30), COUNT(ID) FROM clients ";
             $result = $conn->query($sql);
-          
+
             if ($result->num_rows == 1) {
                 $clients_total_pages = mysqli_fetch_array($result);
 
                 for ($i = 1; $i <= intval($clients_total_pages[0]); $i++) {
-                    echo "<a href='clients.php?page-limit=$i'>";
+                    if(!isset($_GET["page-limit"]) && $i==1) {
+                        echo "<a class='btn btn-primary active' href='clients.php?page-limit=$i$pagination_url'>";
+                    } else if((isset($_GET["page-limit"]) && $_GET["page-limit"] == $i) )
+                    {
+                        echo "<a class='btn btn-primary active' href='clients.php?page-limit=$i$pagination_url'>";
+                    } else {
+                        echo "<a class='btn btn-primary' href='clients.php?page-limit=$i$pagination_url'>";
+                    }
                     echo $i;
                     echo " ";
                     echo "</a>";
@@ -197,7 +206,7 @@ if (isset($_GET["page-limit"])) {
                 // echo "Is viso puslapiu: ";
                 // echo $clients_total_pages[0];
                 // echo "</p>";
-    
+
                 // echo "<p>";
                 // echo "Is viso klientu: ";
                 // echo $clients_total_pages[1];
@@ -205,7 +214,7 @@ if (isset($_GET["page-limit"])) {
             } else {
                 echo "Nepavyko suskaiciuoti klientu";
             }
-            ?> 
+            ?>
         </div>
     </div>
 

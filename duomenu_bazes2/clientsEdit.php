@@ -75,7 +75,7 @@ if (!isset($_COOKIE["login"])) {
     ?>
     <div class="container">
         <?php require_once("includes_menu.php"); ?>
-        <h1>KLiento redagavimas</h1>
+        <h1>Kliento redagavimas</h1>
         <form action="clientsEdit.php" method="get">
         <input class="hide" type="text" name="ID" value ="<?php echo $client["ID"]; ?>" />
             <div class="form-group">
@@ -106,7 +106,7 @@ if (!isset($_COOKIE["login"])) {
             </div>
             <div class="row">
                 <div class="col-lg-12">
-                    <textarea class="form-control" id ="description" name="description"></textarea>
+                    <textarea class="form-control" id ="description" name="description" ><?php echo $client["description"]; ?></textarea>
                 </div>
             </div>
             <div class="btn-action">
@@ -120,6 +120,9 @@ if (!isset($_COOKIE["login"])) {
             </div>
         <?php } ?>
     </div>
+    <script>
+    var text = $('#description').val();
+    </script>
 </body>
 
 </html>
