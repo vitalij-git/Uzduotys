@@ -3,7 +3,7 @@
 $data_base_server="localhost";
 $data_base_nickname="root";
 $data_base_password="";
-$data_base_name="clientsdatabase";
+$data_base_name="blogosystem";
 
 $conn =mysqli_connect($data_base_server,$data_base_nickname,$data_base_password,$data_base_name);
 mysqli_set_charset($conn,"utf-8");
