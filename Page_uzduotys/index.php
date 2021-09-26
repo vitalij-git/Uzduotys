@@ -10,9 +10,9 @@
 <body>
     <div class="container">
         <?php require_once("design/menu.php"); ?>
-        <?php //require_once("design-parts/jumbotron.php"); ?>
-        <?php //showJumbotron("Index", "Welcome to our website"); ?>
-        <?php //require_once("design-parts/main.php"); ?>
+        <?php require_once("design/jumbotron.php"); ?>
+        <?php showJumbotron("Index", "Welcome to our website"); ?>
+        <?php require_once("design/main.php"); ?>
     </div>
 
     <?php
