@@ -4,13 +4,13 @@
 
 function categoryTree ($parent_id = 0, $category_tree_massive = '') {
 
-    require("../connection.php"); 
+    require("connection.php"); 
 
     if(!is_array($category_tree_massive )) {
         $category_tree_massive  = array();
     }
 
-    $sql = "SELECT * FROM category WHERE parent_id = $parent_id AND rodyti = 1"; 
+    $sql = "SELECT * FROM category WHERE parent_id = $parent_id AND show = 1"; 
     
     $result = $conn->query($sql);
 

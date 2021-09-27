@@ -1,10 +1,10 @@
-<?php require_once("../connection.php"); ?>
+<?php require_once("connection.php"); ?>
 
 <?php 
 
-// $sql = "SELECT reiksme FROM nustatymai WHERE ID = 1 "; 
-// $result = $conn->query($sql);
-// $selected_value = mysqli_fetch_array($result);
+$sql = "SELECT value FROM settings WHERE ID = 1 "; 
+$result = $conn->query($sql);
+$selected_value = mysqli_fetch_array($result);
 
 
 
