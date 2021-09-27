@@ -108,15 +108,15 @@
         <?php 
         if(isset($_GET["submit1"])) {
 
-            $reiksmes = $_GET["category"];
-            var_dump($reiksmes);
+            $values = $_GET["category"];
+            var_dump($values);
 
 
             $sql = "UPDATE `category` SET `show`= 0";
             $result = $conn->query($sql);
 
-            foreach ($reiksmes as $reiksme) {
-                $sql = "UPDATE `category` SET `show`= 1 WHERE ID=$reiksme";
+            foreach ($values as $value) {
+                $sql = "UPDATE `category` SET `show`= 1 WHERE ID=$value";
                 $result = $conn->query($sql);
             }
 
